@@ -1,0 +1,35 @@
+# Use postgres/example user/password credentials
+version: '3.1'
+
+services:
+
+  postgresserver:
+    image: postgres
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=123
+      - POSTGRES_DB=Todopostgres
+    networks:
+       - mynetwork
+  todoapi:
+     image: todoapi
+     ports:
+       - 5001:80
+     build:
+       context: .
+       dockerfile: Dockerfile
+     links:
+       - postgresserver
+     depends_on:
+       - "postgresserver"
+     networks:
+       - mynetwork
+volumes:
+  pgdata:
+ 
+networks:
+  mynetwork:
+     driver: bridge
