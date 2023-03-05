@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -9,6 +10,7 @@ using TodoApi.Models;
 
 namespace TodoApi.Controllers
 {
+
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -103,5 +105,7 @@ namespace TodoApi.Controllers
         {
             return _context.Users.Any(e => e.Id == id);
         }
+
+
     }
 }
